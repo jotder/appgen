@@ -26,24 +26,24 @@ export class PageEditor implements OnInit {
   }
 
   reload() {
-    this.api.list().subscribe(pages => this.pages.set(pages));
-    this.cfgApi.list().subscribe(cfgs => this.widgetConfigs.set(cfgs));
+    this.pages.set(this.api.list());
+    this.widgetConfigs.set(this.cfgApi.list());
   }
 
   selectPage(d: Page) { this.selected.set(d); }
 
   newPage() {
     const d: Partial<Page> = { name: 'New Page', layout: { columns: 3 }, widgets: [] as any };
-    this.api.create(d).subscribe(res => {
-      this.reload();
-      this.selected.set(res);
-    });
+    const res = this.api.create(d);
+    this.reload();
+    this.selected.set(res);
   }
 
   savePage() {
     const d = this.selected();
     if (!d) return;
-    this.api.update(d.id, d).subscribe(res => this.selected.set(res));
+    const res = this.api.update(d.id, d);
+    this.selected.set(res);
   }
 
   addWidget(config: WidgetConfig) {
