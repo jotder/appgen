@@ -1,0 +1,20 @@
+[
+  {
+    "id": "users-counter",
+    "name": "Users Counter",
+    "widgetType": "counter",
+    "params": { "label": "Users", "apiUrl": "/api/users/count" }
+  },
+  {
+    "id": "welcome-message",
+    "name": "Welcome Message",
+    "widgetType": "message",
+    "params": { "text": "Welcome to Superset-lite demo!" }
+  },
+  {
+    "id": "simple-message",
+    "name": "Simple Message",
+    "widgetType": "message",
+    "params": { "text": "This is a single widget dashboard." }
+  }
+]

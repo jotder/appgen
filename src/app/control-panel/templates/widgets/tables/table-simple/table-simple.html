@@ -1,0 +1,16 @@
+<div class="table-simple-widget">
+  <h4>{{ config.title }}</h4>
+  <table *ngIf="config.data">
+    <thead>
+      <tr>
+        <th *ngFor="let header of config.headers">{{ header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of config.data">
+        <td *ngFor="let cell of row">{{ cell }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!config.data">No data to display.</p>
+</div>
