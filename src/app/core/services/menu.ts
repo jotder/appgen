@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MenuConfig } from '../models/models';
-import * as menuConfig from '../../assets/data/menu.json';
+import * as menuConfig from '../../../assets/data/menu.json';
 
 @Injectable({
   providedIn: 'root'

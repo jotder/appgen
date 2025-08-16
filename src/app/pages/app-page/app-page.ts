@@ -1,39 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageConfig } from '../../core/models/models';
-import { PageGenerator } from '../../core/generator/page-generator/page-generator';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { PageConfigService } from '../../core/services/page-config.service';
+import {PageGenerator} from "../../core/generator/page-generator/page-generator";
 
 @Component({
   selector: 'app-app-page',
   standalone: true,
   imports: [CommonModule, PageGenerator],
   template: `
-    <ng-container *ngIf="pageConfig$ | async as pageConfig">
-      <app-page-generator [pageConfig]="pageConfig"></app-page-generator>
-    </ng-container>
+    @if (pageConfig(); as config) {
+      <app-page-generator [pageConfig]="config"></app-page-generator>
+    } @else {
+      <p>Page configuration not found for this route.</p>
+    }
   `
 })
 export class AppPage implements OnInit {
-  pageConfig$!: Observable<PageConfig | undefined | null>;
+  pageConfig: WritableSignal<PageConfig | undefined> = signal(undefined);
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private pageConfigService: PageConfigService
   ) {}
 
   ngOnInit(): void {
-    this.pageConfig$ = this.route.params.pipe(
-      switchMap(params => this.getPageConfig(params['id']))
-    );
-  }
-
-  private getPageConfig(id: string): Observable<PageConfig | undefined> {
-    return this.http.get<{dashboards: PageConfig[]}>(`/assets/data/dashboard.config.json`).pipe(
-      map(data => data.dashboards.find(d => d.id === id))
-    );
+    const pageId = this.route.snapshot.paramMap.get('id');
+    if (pageId) {
+      this.pageConfig.set(this.pageConfigService.getPageConfig(pageId));
+    }
   }
 }

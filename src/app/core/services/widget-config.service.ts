@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WidgetConfig } from '../models/models';
-import * as widgetConfigs from '../../assets/data/widget-configs.json';
+import * as widgetConfigs from '../../../assets/data/widget-configs.json';
 
 @Injectable({ providedIn: 'root' })
 export class WidgetConfigService {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Page } from '../models/models';
-import * as pageData from '../../assets/data/pages.json';
+import * as pageData from '../../../assets/data/pages.json';
 
 @Injectable({ providedIn: 'root' })
 export class PageComposer {
