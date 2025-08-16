@@ -12,7 +12,7 @@ AppGenerator is Application generator (Apache Superset like but liter version) l
 - simple Widget templates will be available for Chart component, Table component, Search component, Graph Component etc. data and option data will be fetched for specific instance of the wizard  
 - menu will point to an instance of dashboard template
 
-this Angular 20+ project is developed with "resource API" instead of HttpClient , Signal, without Zone dependency and all new construct like @if @else etc and new component naming guidelines
+this Angular 20+ project is developed with "resource API" instead of HttpClient , Signal, without Zone dependency and all new construct like @if @else etc and new component naming guidelines. No SSR, use signal-based change detection, Services to use mock data and avoid HttpClient and Observable. Verify the application by running the relevant tests, including the Playwright script if possible.
 
 # High-Level Architecture
 * Config-Driven: All UI (dashboards, widgets, menu) are composed from configuration JSON returned by backend APIs.
