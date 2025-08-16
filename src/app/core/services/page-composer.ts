@@ -1,40 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 import { Page } from '../models/models';
-import { tap } from 'rxjs/operators';
+import * as pageData from '../../assets/data/pages.json';
 
 @Injectable({ providedIn: 'root' })
 export class PageComposer {
   private pages: Page[] = [];
-  private pagesLoaded = false;
 
-  constructor(private http: HttpClient) {}
-
-  list(): Observable<Page[]> {
-    if (this.pagesLoaded) {
-      return of(this.pages);
-    }
-    return this.http.get<Page[]>('/assets/data/pages.json').pipe(
-      tap(pages => {
-        this.pages = pages;
-        this.pagesLoaded = true;
-      })
-    );
+  constructor() {
+    this.pages = (pageData as any).default;
   }
 
-  create(page: Partial<Page>): Observable<Page> {
+  list(): Page[] {
+    return this.pages;
+  }
+
+  create(page: Partial<Page>): Page {
     const newPage = { ...page, id: this.uuid() } as Page;
     this.pages.push(newPage);
-    return of(newPage);
+    return newPage;
   }
 
-  update(id: string, page: Page): Observable<Page> {
+  update(id: string, page: Page): Page {
     const index = this.pages.findIndex(p => p.id === id);
     if (index > -1) {
       this.pages[index] = page;
     }
-    return of(page);
+    return page;
   }
 
   private uuid(): string {

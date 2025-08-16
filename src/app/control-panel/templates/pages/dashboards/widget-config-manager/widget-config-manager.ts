@@ -30,10 +30,9 @@ export class WidgetConfigManager implements OnInit {
 
   reload() {
     this.loading.set(true);
-    this.api.list().subscribe(data => {
-      this.configs.set(data);
-      this.loading.set(false);
-    });
+    const data = this.api.list();
+    this.configs.set(data);
+    this.loading.set(false);
   }
 
   select(c: WidgetConfig) {
@@ -61,32 +60,28 @@ export class WidgetConfigManager implements OnInit {
       params: this.formParams()
     };
     if (!current.id) {
-      this.api.create(payload).subscribe(res => {
-        this.selected.set(res);
-        this.reload();
-      });
+      const res = this.api.create(payload);
+      this.selected.set(res);
+      this.reload();
     } else {
-      this.api.update(current.id, payload).subscribe(res => {
-        this.selected.set(res);
-        this.reload();
-      });
+      const res = this.api.update(current.id, payload);
+      this.selected.set(res);
+      this.reload();
     }
   }
 
   remove(c: WidgetConfig) {
     if (!c.id) return;
     if (!confirm('Delete this widget config? Pages using it will be affected.')) return;
-    this.api.delete(c.id).subscribe(() => {
-      this.selected.set(null);
-      this.reload();
-    });
+    this.api.delete(c.id);
+    this.selected.set(null);
+    this.reload();
   }
 
   usage(c: WidgetConfig) {
     if (!c.id) return;
-    this.api.usage(c.id).subscribe(res => {
-      alert(`Used in dashboards: ${res.dashboards.map(d => d.name).join(', ') || '(none)'}`);
-    });
+    const res = this.api.usage(c.id);
+    alert(`Used in dashboards: ${res.dashboards.map(d => d.name).join(', ') || '(none)'}`);
   }
 
   schemaOfSelected() {
