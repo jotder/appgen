@@ -1,0 +1,7 @@
+<nav class="main-menu">
+  <ul *ngIf="menuItems$ | async as menuItems">
+    <li *ngFor="let item of menuItems">
+      <a [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
+    </li>
+  </ul>
+</nav>

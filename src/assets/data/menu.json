@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "label": "Main Dashboard", "route": "/pages/main" },
+    { "label": "Simple Page", "route": "/pages/simple" },
+    { "label": "Settings", "route": "/settings" }
+  ]
+}
