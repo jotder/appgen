@@ -13,7 +13,7 @@
         {
           "instanceId": "w2",
           "type": "message",
-          "config": { "text": "Welcome to Superset-lite demo!" }
+          "config": { "text": "Welcome to appgen demo!" }
         }
       ]
     },

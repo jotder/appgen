@@ -208,7 +208,7 @@ In code, widgets have several “template” variants; select variant via config
     │                   ├─ dashboards/                      # Page Layouts
     │                       ├─ executive-dashboard.ts
     │                       ├─ analytical-detail.ts
-    │                       ├─ widget-config-manager.ts
+    │                       ├─ widget-manager.ts
     │                       ├─ widget-config.ts
     ├─ app.routes.ts
     ├─ app.config.ts

@@ -15,11 +15,11 @@
     <div class="config-form">
       <div>
         <label>Name:</label>
-        <input [value]="config.name" (input)="config.name = $any($event.target).value">
+        <input [value]="config.name" (input)="onNameChange($event)">
       </div>
       <div>
         <label>Type:</label>
-        <select [value]="config.widgetType" (change)="config.widgetType = $any($event.target).value" [disabled]="!creating()">
+        <select [value]="config.widgetType" (change)="onTypeChange($event)" [disabled]="!creating()">
           <option *ngFor="let type of types.list()" [value]="type.id">{{ type.name }}</option>
         </select>
       </div>
