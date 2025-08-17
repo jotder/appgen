@@ -8,12 +8,17 @@
         {
           "instanceId": "w1",
           "type": "counter",
-          "config": { "label": "Users", "apiUrl": "/api/users/count" }
+          "config": {
+            "label": "Users",
+            "apiUrl": "/api/users/count"
+          }
         },
         {
           "instanceId": "w2",
           "type": "message",
-          "config": { "text": "Welcome to appgen demo!" }
+          "config": {
+            "text": "Welcome to appgen demo!"
+          }
         }
       ]
     },
@@ -25,7 +30,9 @@
         {
           "instanceId": "w3",
           "type": "message",
-          "config": { "text": "This is a single widget dashboard." }
+          "config": {
+            "text": "This is a single widget dashboard."
+          }
         }
       ]
     }

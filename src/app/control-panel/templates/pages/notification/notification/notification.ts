@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-notification',
-  imports: [],
-  templateUrl: './notification.html',
-  styleUrl: './notification.scss'
+    selector: 'app-notification',
+    imports: [],
+    templateUrl: './notification.html',
+    styleUrl: './notification.scss'
 })
 export class Notification {
 

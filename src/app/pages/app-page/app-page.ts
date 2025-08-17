@@ -4,9 +4,9 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {map} from 'rxjs/operators';
 import {PageConfig} from '../../core/models/models';
 import {CommonModule} from '@angular/common';
-import { PageConfigService } from '../../core/services/page-config.service';
-import {PageGenerator} from '../../core/generator/page-generator/page-generator';
-import { AuthService } from '../../core/services/auth.service';
+import {PageConfigService} from '../../core/services/page-config.service';
+import {AuthService} from '../../core/services/auth.service';
+import {PageGenerator} from "../../core/generator/page-generator";
 
 @Component({
     selector: 'app-page',
@@ -26,14 +26,23 @@ import { AuthService } from '../../core/services/auth.service';
         }
     `,
     styles: [`
-      .page-container { padding: 1rem; }
+      .page-container {
+        padding: 1rem;
+      }
+
       .page-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
       }
-      button { padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; }
+
+      button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
     `]
 })
 export class AppPage {

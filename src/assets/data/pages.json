@@ -2,30 +2,43 @@
   {
     "id": "main",
     "name": "Main Page",
-    "layout": { "columns": 2 },
+    "layout": {
+      "columns": 2
+    },
     "widgets": [
       {
         "id": "w1",
         "widgetConfigId": "users-counter",
         "titleOverride": "Users",
-        "position": { "colStart": 1, "colSpan": 1 }
+        "position": {
+          "colStart": 1,
+          "colSpan": 1
+        }
       },
       {
         "id": "w2",
         "widgetConfigId": "welcome-message",
-        "position": { "colStart": 2, "colSpan": 1 }
+        "position": {
+          "colStart": 2,
+          "colSpan": 1
+        }
       }
     ]
   },
   {
     "id": "simple",
     "name": "Simple Page",
-    "layout": { "columns": 1 },
+    "layout": {
+      "columns": 1
+    },
     "widgets": [
       {
         "id": "w3",
         "widgetConfigId": "simple-message",
-        "position": { "colStart": 1, "colSpan": 1 }
+        "position": {
+          "colStart": 1,
+          "colSpan": 1
+        }
       }
     ]
   }

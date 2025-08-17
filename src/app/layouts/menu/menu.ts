@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Menu } from '../../core/services/menu';
-import { MenuItem } from '../../core/models/models';
+import {Component, OnInit} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {MatListModule} from '@angular/material/list';
+import {Menu} from '../../core/services/menu';
+import {MenuItem} from '../../core/models/models';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './menu.html',
-  styleUrls: ['./menu.scss']
+    selector: 'app-menu',
+    standalone: true,
+    imports: [RouterModule, MatListModule],
+    templateUrl: './menu.html',
+    styleUrls: ['./menu.scss']
 })
 export class MenuComponent implements OnInit {
-  menuItems: MenuItem[] = [];
+    menuItems: MenuItem[] = [];
 
-  constructor(private menuService: Menu) { }
+    constructor(private menuService: Menu) {
+    }
 
-  ngOnInit(): void {
-    this.menuItems = this.menuService.getMenuConfig().items;
-  }
+    ngOnInit(): void {
+        this.menuItems = this.menuService.getMenuConfig().items;
+    }
 }

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-rules',
-  imports: [],
-  templateUrl: './rules.html',
-  styleUrl: './rules.scss'
+    selector: 'app-rules',
+    imports: [],
+    templateUrl: './rules.html',
+    styleUrl: './rules.scss'
 })
 export class Rules {
 

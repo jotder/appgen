@@ -1,16 +1,25 @@
 <div class="table-simple-widget">
-  <h4>{{ config.title }}</h4>
-  <table *ngIf="config.data">
-    <thead>
-      <tr>
-        <th *ngFor="let header of config.headers">{{ header }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of config.data">
-        <td *ngFor="let cell of row">{{ cell }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <p *ngIf="!config.data">No data to display.</p>
+    <h4>{{ config.title }}</h4>
+    @if (config.data) {
+    <table>
+        <thead>
+            <tr>
+                @for (header of config.headers; track $index) {
+                <th>{{ header }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (row of config.data; track $index) {
+            <tr>
+                @for (cell of row; track $index) {
+                <td>{{ cell }}</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+    } @else {
+    <p>No data to display.</p>
+    }
 </div>

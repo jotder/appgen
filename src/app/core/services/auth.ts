@@ -1,12 +1,12 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import {inject, Injectable, signal} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private readonly router = inject(Router);
     readonly isAuthenticated = signal(false);
+    private readonly router = inject(Router);
 
     login(): void {
         // In a real app, you'd have authentication logic here.
