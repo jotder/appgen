@@ -1,0 +1,5 @@
+Google Gemini family (Gemini 3, Gemini 2.5 Pro)
+OpenAI GPT family (GPT-3.5, GPT-4, GPT-4o)
+Anthropic Claude family (Claude 2, Claude 3 Sonnet, Claude 3 Opus)
+Meta Llama family (Llama 2, Llama 3)
+Mistral AI family (Mistral 7B, Mixtral 8x7B)
