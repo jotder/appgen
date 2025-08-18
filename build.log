@@ -1,0 +1,15 @@
+
+> app-generator@0.0.0 build
+> ng build
+
+❯ Building...
+✔ Building...
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-ROTMWF7P.js    | main          | 214.14 kB |                58.76 kB
+styles-FZ5DCGOV.css | styles        | 103.04 kB |                 7.58 kB
+
+                    | Initial total | 317.18 kB |                66.33 kB
+
+Application bundle generation complete. [3.733 seconds]
+
+Output location: /app/dist/app-generator

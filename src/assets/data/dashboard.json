@@ -1,0 +1,21 @@
+{
+  "pageName": "dashboard",
+  "layout": {
+    "type": "single-column",
+    "slots": [
+      {
+        "id": "main",
+        "widgets": [
+          {
+            "id": "widget-1",
+            "type": "line-chart",
+            "config": {
+              "title": "Monthly Revenue",
+              "apiUrl": "/api/data/monthly-revenue"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

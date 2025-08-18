@@ -1,0 +1,5 @@
+@if (pageConfig(); as config) {
+  <app-page-host [pageName]="pageName()" [pageConfig]="config"></app-page-host>
+} @else {
+  <p>Loading page...</p>
+}
