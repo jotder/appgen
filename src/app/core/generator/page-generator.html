@@ -1,6 +1,0 @@
-<div *ngIf="pageConfig" [ngClass]="pageConfig.layout">
-    <h1>{{ pageConfig.title }}</h1>
-    <div class="widgets-container">
-        <app-widget-host *ngFor="let widget of pageConfig.widgets" [widget]="widget"></app-widget-host>
-    </div>
-</div>

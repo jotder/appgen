@@ -1,0 +1,16 @@
+{
+  "appName": "AppGenerator",
+  "landingPage": "dashboard",
+  "menu": [
+    {
+      "id": "menu-dashboard",
+      "label": "Dashboard",
+      "pageId": "dashboard"
+    },
+    {
+      "id": "menu-reports",
+      "label": "Reports",
+      "pageId": "reports"
+    }
+  ]
+}
