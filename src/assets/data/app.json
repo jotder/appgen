@@ -1,9 +1,9 @@
 {
-  "mainPage": "dashboard",
-  "navigation": [
+  "menu": [
     {
-      "label": "Dashboard",
-      "pageId": "dashboard"
+      "id": "dashboard",
+      "title": "Dashboard",
+      "route": "/pages/dashboard"
     }
   ]
 }

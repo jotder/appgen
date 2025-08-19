@@ -1,21 +1,26 @@
 {
-  "pageName": "dashboard",
-  "layout": {
-    "type": "single-column",
-    "slots": [
-      {
-        "id": "main",
-        "widgets": [
-          {
-            "id": "widget-1",
-            "type": "line-chart",
-            "config": {
-              "title": "Monthly Revenue",
-              "apiUrl": "/api/data/monthly-revenue"
-            }
+  "pages": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "layout": "grid",
+      "widgets": [
+        {
+          "instanceId": "w1",
+          "type": "line-chart",
+          "config": {
+            "title": "Sales Over Time",
+            "data": [
+              { "month": "Jan", "sales": 1000 },
+              { "month": "Feb", "sales": 1200 },
+              { "month": "Mar", "sales": 1500 },
+              { "month": "Apr", "sales": 1300 },
+              { "month": "May", "sales": 1600 },
+              { "month": "Jun", "sales": 1800 }
+            ]
           }
-        ]
-      }
-    ]
-  }
+        }
+      ]
+    }
+  ]
 }

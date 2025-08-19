@@ -1,12 +1,12 @@
 <div class="page-container">
-  <h2>Dashboard Page</h2>
-  <div class="layout-{{ config.layout?.type }}">
-    @for (slot of config.layout?.slots; track slot.id) {
-      <div class="slot-{{ slot.id }}">
-        @for (widget of slot.widgets; track widget.id) {
-          <app-widget-host [widgetConfig]="widget"></app-widget-host>
-        }
-      </div>
+  @if(config) {
+  <h2>{{ config.title }}</h2>
+  <div class="widget-grid">
+    @for (widget of config.widgets; track widget.instanceId) {
+    <div class="widget-container">
+      <app-widget-host [widgetConfig]="widget"></app-widget-host>
+    </div>
     }
   </div>
+  }
 </div>
