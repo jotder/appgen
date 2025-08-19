@@ -1,5 +1,8 @@
 <div class="widget-container">
-  <h3>{{ config.title }}</h3>
-  <p>Line chart widget is rendered.</p>
-  <pre>{{ config | json }}</pre>
+  <h3>{{ config.config.title }}</h3>
+  <ul>
+    @for(item of config.config.data; track item.month) {
+    <li>{{ item.month }}: {{ item.sales }}</li>
+    }
+  </ul>
 </div>

@@ -1,22 +1,16 @@
 <div class="app-container">
-  @if (appConfig()) {
-    <nav class="navigation-menu">
-      <div class="menu-header">
-        <h2>{{ appConfig().appName }}</h2>
-      </div>
-      <ul>
-        @for (item of menuItems(); track item.id) {
-          <li>
-            <a [routerLink]="['/pages', item.pageId]">{{ item.label }}</a>
-          </li>
-        }
-      </ul>
-    </nav>
-  } @else {
-    <div class="loading-indicator">
-      <p>Loading application...</p>
+  <nav class="navigation-menu">
+    <div class="menu-header">
+      <h2>App Generator</h2>
     </div>
-  }
+    <ul>
+      @for (item of menuItems(); track item.id) {
+      <li>
+        <a [routerLink]="item.route">{{ item.title }}</a>
+      </li>
+      }
+    </ul>
+  </nav>
 
   <main class="content-area">
     <router-outlet></router-outlet>

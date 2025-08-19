@@ -1,22 +1,25 @@
 import { Injectable, Type } from '@angular/core';
+import { WidgetConfig } from '../models';
 
 // Define a common interface for all widget components
 export interface IWidget {
-  config: any;
+  config: WidgetConfig;
 }
 
 // A type for the component class itself
 export type WidgetComponentType = Type<IWidget>;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WidgetRegistryService {
   private widgetRegistry = new Map<string, WidgetComponentType>();
 
   registerWidget(widgetType: string, component: WidgetComponentType): void {
     if (this.widgetRegistry.has(widgetType)) {
-      console.warn(`Widget type "${widgetType}" is already registered. Overwriting.`);
+      console.warn(
+        `Widget type "${widgetType}" is already registered. Overwriting.`
+      );
     }
     this.widgetRegistry.set(widgetType, component);
   }

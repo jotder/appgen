@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PAGE_CONFIG } from '../../core/tokens';
 import { IPage } from '../../core/services/page-registry.service';
 import { WidgetHostComponent } from '../../components/widget-host/widget-host.component';
+import { PageConfig } from '../../core/models';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -11,11 +12,5 @@ import { WidgetHostComponent } from '../../components/widget-host/widget-host.co
   templateUrl: './dashboard-page.component.html',
 })
 export class DashboardPageComponent implements IPage {
-  config = inject(PAGE_CONFIG);
-
-  // Helper to get widgets for a specific slot
-  getWidgetsForSlot(slotId: string): any[] {
-    const slot = this.config.layout?.slots?.find((s: any) => s.id === slotId);
-    return slot?.widgets || [];
-  }
+  config: PageConfig | null = inject(PAGE_CONFIG);
 }

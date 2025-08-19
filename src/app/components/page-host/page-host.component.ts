@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { PageRegistryService } from '../../core/services/page-registry.service';
 import { PAGE_CONFIG } from '../../core/tokens';
+import { PageConfig } from '../../core/models';
 
 @Component({
   selector: 'app-page-host',
@@ -21,7 +22,7 @@ export class PageHostComponent implements OnChanges {
   private readonly injector = inject(Injector);
 
   @Input({ required: true }) pageName: string | null = null;
-  @Input() pageConfig: any = {};
+  @Input() pageConfig: PageConfig | null = null;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['pageName'] && this.pageName) {
