@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { WidgetRegistryService } from '../../core/services/widget-registry.service';
 import { WIDGET_CONFIG } from '../../core/tokens';
+import { WidgetConfig } from '../../core/models';
 
 @Component({
   selector: 'app-widget-host',
@@ -20,7 +21,7 @@ export class WidgetHostComponent implements OnChanges {
   private readonly vcr = inject(ViewContainerRef);
   private readonly injector = inject(Injector);
 
-  @Input({ required: true }) widgetConfig: any;
+  @Input({ required: true }) widgetConfig!: WidgetConfig;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['widgetConfig'] && this.widgetConfig) {
