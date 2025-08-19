@@ -1,14 +1,14 @@
-import { PageRegistryService } from './services/page-registry.service';
-import { WidgetRegistryService } from './services/widget-registry.service';
-import { DashboardPageComponent } from '../pages/dashboard/dashboard-page.component';
-import { LineChartComponent } from '../widgets/line-chart/line-chart.component';
+import {PageRegistry} from './services/page-registry';
+import {WidgetRegistry} from './services/widget-registry';
+import {DashboardPage} from '../pages/dashboard/dashboard-page';
+import {LineChart} from '../widgets/line-chart/line-chart';
 
-export function registerPages(registry: PageRegistryService): void {
-  registry.registerPage('dashboard', DashboardPageComponent);
-  // Register other pages here
+export function registerPages(registry: PageRegistry): void {
+    registry.registerPage('dashboard', DashboardPage);
+    // Register other pages here
 }
 
-export function registerWidgets(registry: WidgetRegistryService): void {
-  registry.registerWidget('line-chart', LineChartComponent);
-  // Register other widgets here
+export function registerWidgets(registry: WidgetRegistry): void {
+    registry.registerWidget('line-chart', LineChart);
+    // Register other widgets here
 }

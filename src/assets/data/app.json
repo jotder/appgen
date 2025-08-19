@@ -4,6 +4,16 @@
       "id": "dashboard",
       "title": "Dashboard",
       "route": "/pages/dashboard"
+    },
+    {
+      "id": "sales-report",
+      "title": "Sales Report",
+      "route": "/pages/sales-report"
+    },
+    {
+      "id": "user-activity",
+      "title": "User Activity",
+      "route": "/pages/user-activity"
     }
   ]
 }

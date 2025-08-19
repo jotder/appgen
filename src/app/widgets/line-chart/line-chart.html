@@ -1,0 +1,8 @@
+<div class="widget-container">
+    <h3>{{ config.title }}</h3>
+    <ul>
+        @for (item of config.data; track item.month) {
+            <li>{{ item.month }}: {{ item.sales }}</li>
+        }
+    </ul>
+</div>

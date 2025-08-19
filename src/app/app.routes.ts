@@ -1,14 +1,21 @@
-import { Routes } from '@angular/router';
-import { DynamicPageComponent } from './pages/dynamic-page/dynamic-page.component';
+import {Routes} from '@angular/router';
 
+/** Defines the main application routes. */
 export const routes: Routes = [
-  {
-    path: 'pages/:id',
-    component: DynamicPageComponent,
-  },
-  {
-    path: '',
-    redirectTo: '/pages/dashboard', // Default route
-    pathMatch: 'full',
-  },
+    {
+        path: '',
+        redirectTo: 'pages/dashboard',
+        pathMatch: 'full',
+    },
+    {
+        path: 'pages/:id',
+        loadComponent: () =>
+            import('./pages/dynamic-page/dynamic-page').then(
+                (m) => m.DynamicPage
+            ),
+    },
+    {
+        path: '**',
+        redirectTo: 'pages/dashboard', // Fallback route
+    },
 ];

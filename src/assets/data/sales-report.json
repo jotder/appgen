@@ -1,0 +1,51 @@
+{
+  "pages": [
+    {
+      "id": "sales-report",
+      "title": "Sales Report",
+      "layout": "grid",
+      "widgets": [
+        {
+          "instanceId": "sr1",
+          "type": "summary-cards",
+          "config": {
+            "title": "Sales Overview",
+            "cards": [
+              { "label": "Total Revenue", "value": "$1.2M" },
+              { "label": "Total Orders", "value": "8,450" },
+              { "label": "Avg. Order Value", "value": "$142.01" },
+              { "label": "Conversion Rate", "value": "3.45%" }
+            ]
+          }
+        },
+        {
+          "instanceId": "sr2",
+          "type": "pie-chart",
+          "config": {
+            "title": "Sales by Category",
+            "data": [
+              { "category": "Electronics", "sales": 450000 },
+              { "category": "Apparel", "sales": 300000 },
+              { "category": "Home Goods", "sales": 250000 },
+              { "category": "Books", "sales": 200000 }
+            ]
+          }
+        },
+        {
+          "instanceId": "sr3",
+          "type": "data-table",
+          "config": {
+            "title": "Top Selling Products",
+            "columns": ["productId", "name", "unitsSold", "revenue"],
+            "data": [
+              { "productId": "P001", "name": "Laptop Pro", "unitsSold": 120, "revenue": 144000 },
+              { "productId": "P002", "name": "Wireless Mouse", "unitsSold": 800, "revenue": 24000 },
+              { "productId": "P003", "name": "Mechanical Keyboard", "unitsSold": 450, "revenue": 40500 },
+              { "productId": "P004", "name": "4K Monitor", "unitsSold": 90, "revenue": 36000 }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

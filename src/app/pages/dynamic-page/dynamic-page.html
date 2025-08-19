@@ -1,0 +1,12 @@
+@if (page(); as p) {
+    <div class="page-container">
+        <h1 class="page-title">{{ p.title }}</h1>
+        <div class="widget-grid">
+            @for (widget of p.widgets; track widget.instanceId) {
+                <app-widget-host [config]="widget"></app-widget-host>
+            }
+        </div>
+    </div>
+} @else {
+    <p>PageModel not found or is loading...</p>
+}

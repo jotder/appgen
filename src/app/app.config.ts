@@ -1,27 +1,29 @@
-import { ApplicationConfig, APP_INITIALIZER, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-import { PageRegistryService } from './core/services/page-registry.service';
-import { WidgetRegistryService } from './core/services/widget-registry.service';
-import { registerPages, registerWidgets } from './core/registries';
+import {APP_INITIALIZER, ApplicationConfig, provideZonelessChangeDetection} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
+import {PageRegistry} from './core/services/page-registry';
+import {WidgetRegistry} from './core/services/widget-registry';
+import {registerPages, registerWidgets} from './core/registries';
 
+/** Application configuration object. */
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (
-        pageRegistry: PageRegistryService,
-        widgetRegistry: WidgetRegistryService
-      ) => {
-        return () => {
-          registerPages(pageRegistry);
-          registerWidgets(widgetRegistry);
-        };
-      },
-      deps: [PageRegistryService, WidgetRegistryService],
-      multi: true,
-    },
-  ],
+    providers: [
+        provideZonelessChangeDetection(),
+        provideRouter(routes),
+        {
+            // Registers pages and widgets on application startup.
+            provide: APP_INITIALIZER,
+            useFactory: (
+                pageRegistry: PageRegistry,
+                widgetRegistry: WidgetRegistry
+            ) => {
+                return () => {
+                    registerPages(pageRegistry);
+                    registerWidgets(widgetRegistry);
+                };
+            },
+            deps: [PageRegistry, WidgetRegistry],
+            multi: true,
+        },
+    ],
 };

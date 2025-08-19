@@ -1,25 +1,19 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ConfigService } from './core/services/config.service';
-import { AppConfig, MenuItem } from './core/models';
+import {Component, inject} from '@angular/core';
+import {RouterLink, RouterOutlet} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Config} from './core/services/config';
 
+/** The root component of the application. */
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    standalone: true,
+    imports: [CommonModule, RouterOutlet, RouterLink],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  private readonly configService = inject(ConfigService);
+export class AppComponent {
+    private readonly config = inject(Config);
 
-  appConfig = signal<AppConfig | null>(null);
-  menuItems = signal<MenuItem[]>([]);
-
-  async ngOnInit(): Promise<void> {
-    const config = await this.configService.getAppConfig();
-    this.appConfig.set(config);
-    this.menuItems.set(config?.menu || []);
-  }
+    /** Signal for the main navigation menu items. */
+    readonly menuItems = this.config.menuItems;
 }

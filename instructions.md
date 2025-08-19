@@ -17,12 +17,12 @@ You must understand and respect this architecture in all your responses.
 
 -   **Config-Driven:** All UI elements (application, pages, widgets, menus) are composed from JSON configurations returned by backend APIs.
 -   **Widget System:** Widgets are the fundamental building blocks. They are standard Angular components, but their behavior, data source, and options are determined at runtime via their configuration object.
--   **Page System:** Pages are the feature page contains one or many widgets. They are container Angular components with page layout and widget placeholder, but pages can fetch, construct widget configuration and feed behavior, data, and options are determined at runtime. there will be a configuration json for each page
--   **Application Builder:** A central `AppBuilder` component has two functions. 1. it defines menu system and link each menu to existing feature `PageComponent`. It builds configuration for page widget placeholders, configures which widget will be placed on respective placeholder inside the page.  It generated `app.json` can be configured to define menu hierarchies and link to the feature pages, and link to specific page configuration
--   **Application Rendering:** A central `AppGenerator` component renders manu, sub-menus and link the menus to a `PageHostComponent` to dynamically instantiate the correct page component based on the JSON configured by `AppBuilder`, this also link a main page where application will be routed after login. 
--   **Dynamic Feature Pages Rendering:** A central `PageGenerator` component renders a page layout and uses a `PageHostComponent` to dynamically instantiate the correct feature page component based on the JSON config.
--   **Dynamic Widget Rendering:** A central `WidgetGenerator` component renders a page layout and uses a `WidgetHostComponent` to dynamically instantiate the correct widget component based on the JSON config.
--   **Page Registry:** A `PageRegistry` service maps a page `name` (a string from the JSON, e.g., `"executive-dashboard"`, `"kanban-view"`) to an actual Angular component class.
+-   **PageModel System:** Pages are the feature page contains one or many widgets. They are container Angular components with page layout and widget placeholder, but pages can fetch, construct widget configuration and feed behavior, data, and options are determined at runtime. there will be a configuration json for each page
+-   **Application Builder:** A central `AppBuilder` component has two functions. 1. it defines menu system and link each menu to existing feature `PageModel`. It builds configuration for page widget placeholders, configures which widget will be placed on respective placeholder inside the page.  It generated `app.json` can be configured to define menu hierarchies and link to the feature pages, and link to specific page configuration
+-   **Application Rendering:** A central `AppGenerator` component renders manu, sub-menus and link the menus to a `PageHost` to dynamically instantiate the correct page component based on the JSON configured by `AppBuilder`, this also link a main page where application will be routed after login. 
+-   **Dynamic Feature Pages Rendering:** A central `PageGenerator` component renders a page layout and uses a `PageHost` to dynamically instantiate the correct feature page component based on the JSON config.
+-   **Dynamic Widget Rendering:** A central `WidgetGenerator` component renders a page layout and uses a `WidgetHost` to dynamically instantiate the correct widget component based on the JSON config.
+-   **PageModel Registry:** A `PageRegistry` service maps a page `name` (a string from the JSON, e.g., `"executive-dashboard"`, `"kanban-view"`) to an actual Angular component class.
 -   **Widget Registry:** A `WidgetRegistry` service maps a widget `type` (a string from the JSON, e.g., `"line-chart"`,`"data-table"`) to an actual Angular component class.
 -   **Simple "Builder" UI:** All configuration is managed by editing the underlying JSON, not through a pixel adjustment interface.
 
@@ -48,9 +48,9 @@ This is the fundamental flow of the application.
     1. `app.json` should have the configuration for menu and sub-menu pages and marker for main app landing page after successful login .
     2. for admin user, control-panel and setting navigation and routing should be available.
     3. on control-panel contains Application builder, and feature page building artifacts  
-3.  **Page Navigation:** User clicks a menu item, navigating to a route like `/pages/some-page-id`.
-4.  **Page Config Fetch:** The application fetches the corresponding `page.json` for `some-page-id`.
-5.  **Page Host and Instantiation:** The `PageGeneratorComponent` reads the `layout` and iterates through the `widgets` array in the JSON.
+3.  **PageModel Navigation:** User clicks a menu item, navigating to a route like `/pages/some-page-id`.
+4.  **PageModel Config Fetch:** The application fetches the corresponding `page.json` for `some-page-id`.
+5.  **PageModel Host and Instantiation:** The `PageGeneratorComponent` reads the `layout` and iterates through the `widgets` array in the JSON.
 6.  **Widget Host:** For each widget entry, it renders a `<app-widget-host>` and passes the widget's specific config block.
-7.  **Widget Instantiation:** The `WidgetHostComponent` uses the `WidgetRegistry` to find the correct Angular component for the widget's `type` and creates an instance of it.
-8.  **Widget Render:** The specific widget component (e.g., `LineChartComponent`) is now active. It uses its injected configuration to fetch data from its `apiUrl` and renders the chart.
+7.  **Widget Instantiation:** The `WidgetHost` uses the `WidgetRegistry` to find the correct Angular component for the widget's `type` and creates an instance of it.
+8.  **Widget Render:** The specific widget component (e.g., `LineChart`) is now active. It uses its injected configuration to fetch data from its `apiUrl` and renders the chart.

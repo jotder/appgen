@@ -1,18 +1,18 @@
 <div class="app-container">
-  <nav class="navigation-menu">
-    <div class="menu-header">
-      <h2>App Generator</h2>
-    </div>
-    <ul>
-      @for (item of menuItems(); track item.id) {
-      <li>
-        <a [routerLink]="item.route">{{ item.title }}</a>
-      </li>
-      }
-    </ul>
-  </nav>
+    <nav class="navigation-menu">
+        <div class="menu-header">
+            <h2>App Generator</h2>
+        </div>
+        <ul>
+            @for (item of menuItems(); track item.id) {
+                <li>
+                    <a [routerLink]="item.route">{{ item.title }}</a>
+                </li>
+            }
+        </ul>
+    </nav>
 
-  <main class="content-area">
-    <router-outlet></router-outlet>
-  </main>
+    <main class="content-area">
+        <router-outlet></router-outlet>
+    </main>
 </div>
