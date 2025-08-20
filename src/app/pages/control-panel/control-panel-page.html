@@ -12,19 +12,60 @@
       (cancelled)="toggleWizard()"
     ></app-page-wizard>
   } @else {
-    <div class="config-editor" [formGroup]="configForm">
-      <h2>Application Configuration (app.json)</h2>
-      <textarea formControlName="appConfig"></textarea>
+    <div class="config-editor" [formGroup]="appConfigForm">
+      <h2>Application Configuration</h2>
+      <div class="form-field">
+        <label for="landingPage">Landing Page:</label>
+        <input id="landingPage" formControlName="landingPage" />
+      </div>
+      <div formGroupName="layout">
+        <h3>Layout</h3>
+        <div class="form-field">
+          <label for="menu">Show Menu:</label>
+          <input id="menu" type="checkbox" formControlName="menu" />
+        </div>
+        <div class="form-field">
+          <label for="header">Show Header:</label>
+          <input id="header" type="checkbox" formControlName="header" />
+        </div>
+        <div class="form-field">
+          <label for="footer">Show Footer:</label>
+          <input id="footer" type="checkbox" formControlName="footer" />
+        </div>
+      </div>
+      <button (click)="saveChanges()">Save App Config</button>
+    </div>
 
+    <div class="page-editors">
       <h2>Page Configurations</h2>
       @for (page of pages(); track page.id) {
-        <div class="page-editor">
-          <h3>{{ page.title }} ({{ page.id }}.json)</h3>
-          <textarea [formControlName]="page.id"></textarea>
-        </div>
+        <app-page-editor
+          [page]="page"
+          (pageUpdated)="handlePageUpdated($event)"
+        ></app-page-editor>
       }
+    </div>
 
-      <button (click)="saveChanges()">Save All Changes</button>
+    <div class="menu-editor">
+      <h2>Menu Management</h2>
+      <div class="menu-list-container">
+        <div class="menu-list">
+          <h3>Admin Menu</h3>
+          <div cdkDropList [cdkDropListData]="adminMenu()" (cdkDropListDropped)="drop($event, 'admin')">
+            @for (item of adminMenu(); track item.id) {
+              <div class="menu-item" cdkDrag>{{ item.title }}</div>
+            }
+          </div>
+        </div>
+        <div class="menu-list">
+          <h3>User Menu</h3>
+          <div cdkDropList [cdkDropListData]="userMenu()" (cdkDropListDropped)="drop($event, 'user')">
+            @for (item of userMenu(); track item.id) {
+              <div class="menu-item" cdkDrag>{{ item.title }}</div>
+            }
+          </div>
+        </div>
+      </div>
     </div>
   }
 </div>

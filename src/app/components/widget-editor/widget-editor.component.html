@@ -1,0 +1,21 @@
+<div class="widget-editor-form" [formGroup]="widgetForm">
+  <h3>{{ widget ? 'Edit Widget' : 'Add Widget' }}</h3>
+  <div class="form-field">
+    <label for="id">Widget ID:</label>
+    <input id="id" formControlName="id" />
+  </div>
+  <div class="form-field">
+    <label for="type">Widget Type:</label>
+    <input id="type" formControlName="type" />
+  </div>
+  <div formGroupName="config">
+    <div class="form-field">
+      <label for="title">Widget Title:</label>
+      <input id="title" formControlName="title" />
+    </div>
+  </div>
+  <div class="form-actions">
+    <button (click)="save()">Save Widget</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+</div>
