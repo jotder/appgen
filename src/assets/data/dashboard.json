@@ -1,108 +1,37 @@
 {
-  "pages": [
+  "id": "dashboard",
+  "title": "Dashboard",
+  "layout": "grid",
+  "widgets": [
     {
-      "id": "dashboard",
-      "title": "Dashboard",
-      "layout": "grid",
-      "widgets": [
-        {
-          "instanceId": "w1",
-          "type": "line-chart",
-          "config": {
-            "title": "Sales Over Time",
-            "data": [
-              {
-                "month": "Jan",
-                "sales": 1000
-              },
-              {
-                "month": "Feb",
-                "sales": 1200
-              },
-              {
-                "month": "Mar",
-                "sales": 1500
-              },
-              {
-                "month": "Apr",
-                "sales": 1300
-              },
-              {
-                "month": "May",
-                "sales": 1600
-              },
-              {
-                "month": "Jun",
-                "sales": 1800
-              }
-            ]
-          }
-        },
-        {
-          "instanceId": "w2",
-          "type": "bar-chart",
-          "config": {
-            "title": "Sales by Region",
-            "data": [
-              {
-                "region": "North",
-                "sales": 5400
-              },
-              {
-                "region": "South",
-                "sales": 3200
-              },
-              {
-                "region": "East",
-                "sales": 4100
-              },
-              {
-                "region": "West",
-                "sales": 2800
-              }
-            ]
-          }
-        },
-        {
-          "instanceId": "w3",
-          "type": "data-table",
-          "config": {
-            "title": "Recent Orders",
-            "columns": [
-              "orderId",
-              "customer",
-              "amount",
-              "status"
-            ],
-            "data": [
-              {
-                "orderId": "ORD001",
-                "customer": "John Doe",
-                "amount": 250,
-                "status": "Shipped"
-              },
-              {
-                "orderId": "ORD002",
-                "customer": "Jane Smith",
-                "amount": 150,
-                "status": "Processing"
-              },
-              {
-                "orderId": "ORD003",
-                "customer": "Sam Green",
-                "amount": 450,
-                "status": "Shipped"
-              },
-              {
-                "orderId": "ORD004",
-                "customer": "Chris Lee",
-                "amount": 80,
-                "status": "Delivered"
-              }
-            ]
-          }
-        }
-      ]
+      "instanceId": "w1",
+      "type": "line-chart",
+      "config": {
+        "title": "Sales Over Time",
+        "apiUrl": "/api/data/dashboard/sales-over-time"
+      }
+    },
+    {
+      "instanceId": "w2",
+      "type": "bar-chart",
+      "config": {
+        "title": "Sales by Region",
+        "apiUrl": "/api/data/dashboard/sales-by-region"
+      }
+    },
+    {
+      "instanceId": "w3",
+      "type": "data-table",
+      "config": {
+        "title": "Recent Orders",
+        "columns": [
+          "orderId",
+          "customer",
+          "amount",
+          "status"
+        ],
+        "apiUrl": "/api/data/dashboard/recent-orders"
+      }
     }
   ]
 }

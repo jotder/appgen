@@ -1,87 +1,36 @@
 {
-  "pages": [
+  "id": "user-activity",
+  "title": "User Activity",
+  "layout": "grid",
+  "widgets": [
     {
-      "id": "user-activity",
-      "title": "User Activity",
-      "layout": "grid",
-      "widgets": [
-        {
-          "instanceId": "ua1",
-          "type": "stat-card",
-          "config": {
-            "title": "Active Users (24h)",
-            "value": "1,234",
-            "trend": "+5.2%"
-          }
-        },
-        {
-          "instanceId": "ua2",
-          "type": "line-chart",
-          "config": {
-            "title": "User Signups Over Time",
-            "data": [
-              {
-                "date": "2023-01",
-                "signups": 150
-              },
-              {
-                "date": "2023-02",
-                "signups": 200
-              },
-              {
-                "date": "2023-03",
-                "signups": 180
-              },
-              {
-                "date": "2023-04",
-                "signups": 220
-              },
-              {
-                "date": "2023-05",
-                "signups": 250
-              },
-              {
-                "date": "2023-06",
-                "signups": 300
-              }
-            ]
-          }
-        },
-        {
-          "instanceId": "ua3",
-          "type": "data-table",
-          "config": {
-            "title": "Latest User Actions",
-            "columns": [
-              "user",
-              "action",
-              "timestamp"
-            ],
-            "data": [
-              {
-                "user": "user@example.com",
-                "action": "Logged In",
-                "timestamp": "2023-07-21T10:00:00Z"
-              },
-              {
-                "user": "test@example.com",
-                "action": "Viewed Page: Dashboard",
-                "timestamp": "2023-07-21T09:58:12Z"
-              },
-              {
-                "user": "demo@example.com",
-                "action": "Updated Profile",
-                "timestamp": "2023-07-21T09:55:45Z"
-              },
-              {
-                "user": "user@example.com",
-                "action": "Created Widget",
-                "timestamp": "2023-07-21T09:52:03Z"
-              }
-            ]
-          }
-        }
-      ]
+      "instanceId": "ua1",
+      "type": "stat-card",
+      "config": {
+        "title": "Active Users (24h)",
+        "apiUrl": "/api/data/user-activity/active-users"
+      }
+    },
+    {
+      "instanceId": "ua2",
+      "type": "line-chart",
+      "config": {
+        "title": "User Signups Over Time",
+        "apiUrl": "/api/data/user-activity/signups-over-time"
+      }
+    },
+    {
+      "instanceId": "ua3",
+      "type": "data-table",
+      "config": {
+        "title": "Latest User Actions",
+        "columns": [
+          "user",
+          "action",
+          "timestamp"
+        ],
+        "apiUrl": "/api/data/user-activity/latest-actions"
+      }
     }
   ]
 }
