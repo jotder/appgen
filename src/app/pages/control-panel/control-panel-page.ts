@@ -1,44 +1,60 @@
 import { Component, inject, signal } from '@angular/core';
 import { Config } from '../../core/services/config';
-import { PageModel } from '../../core/models';
+import { PageModel, MenuItem } from '../../core/models';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PageWizardComponent } from '../../components/page-wizard/page-wizard.component';
+import { PageEditorComponent } from '../../components/page-editor/page-editor.component';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ConfigStore } from '../../core/services/config.store';
 
 @Component({
   selector: 'app-control-panel-page',
   standalone: true,
-  imports: [ReactiveFormsModule, PageWizardComponent],
+  imports: [ReactiveFormsModule, PageWizardComponent, PageEditorComponent, DragDropModule],
   templateUrl: './control-panel-page.html',
   styleUrls: ['./control-panel-page.scss'],
 })
 export class ControlPanelPage {
-  private readonly config = inject(Config);
+  private readonly configService = inject(Config);
+  private readonly configStore = inject(ConfigStore);
   private readonly fb = inject(FormBuilder);
 
   showWizard = signal(false);
-  pages = signal<PageModel[]>(this.config.getAllPages());
-  configForm: FormGroup;
+  pages = signal<PageModel[]>(this.configService.getAllPages());
+  appConfigForm: FormGroup;
+  adminMenu = signal<MenuItem[]>([]);
+  userMenu = signal<MenuItem[]>([]);
 
   constructor() {
-    const formControls: { [key: string]: any } = {
-      appConfig: [JSON.stringify(this.config.appConfig(), null, 2)],
-    };
-    this.pages().forEach(page => {
-      formControls[page.id] = [JSON.stringify(page, null, 2)];
+    const appConfig = this.configService.appConfig();
+    this.appConfigForm = this.fb.group({
+      landingPage: [appConfig.landingPage],
+      layout: this.fb.group({
+        menu: [appConfig.layout.menu],
+        header: [appConfig.layout.header],
+        footer: [appConfig.layout.footer],
+      }),
     });
-    this.configForm = this.fb.group(formControls);
+
+    this.adminMenu.set(this.configService.getMenuForRole('admin'));
+    this.userMenu.set(this.configService.getMenuForRole('user'));
   }
 
   saveChanges(): void {
-    // In a real application, this would send the updated JSON to a backend service.
-    // For this demo, we can just log the changes to the console.
-    console.log('Saving app config:', this.configForm.get('appConfig')?.value);
+    const appConfig = this.configService.appConfig();
+    appConfig.landingPage = this.appConfigForm.value.landingPage;
+    appConfig.layout = this.appConfigForm.value.layout;
+    appConfig.auth['admin'].menu = this.adminMenu();
+    appConfig.auth['user'].menu = this.userMenu();
+
+    this.configStore.updateAppConfig(appConfig);
+
     this.pages().forEach(page => {
-      console.log(
-        `Saving page config for ${page.id}:`,
-        this.configForm.get(page.id)?.value
-      );
+      this.configStore.updatePage(page);
     });
+
+    this.configService.loadData();
+    alert('Changes saved and application state updated!');
   }
 
   toggleWizard(): void {
@@ -46,9 +62,29 @@ export class ControlPanelPage {
   }
 
   handlePageCreated(newPage: PageModel): void {
-    // For now, we'll just log the new page to the console.
-    // In a real app, this would involve creating a new file.
-    console.log('New page created:', newPage);
+    this.configStore.addPage(newPage);
+    const newMenuItem = { id: newPage.id, title: newPage.title, page: newPage.id };
+    const appConfig = this.configService.appConfig();
+    appConfig.auth['admin'].menu.push(newMenuItem);
+    this.configStore.updateAppConfig(appConfig);
+
+    this.configService.loadData();
+    this.pages.set(this.configService.getAllPages());
+    this.adminMenu.set(this.configService.getMenuForRole('admin'));
     this.toggleWizard();
+  }
+
+  handlePageUpdated(updatedPage: PageModel): void {
+    this.pages.update(pages =>
+      pages.map(page => (page.id === updatedPage.id ? updatedPage : page))
+    );
+  }
+
+  drop(event: CdkDragDrop<MenuItem[]>, role: 'admin' | 'user'): void {
+    const menu = role === 'admin' ? this.adminMenu : this.userMenu;
+    menu.update(menuItems => {
+      moveItemInArray(menuItems, event.previousIndex, event.currentIndex);
+      return [...menuItems];
+    });
   }
 }

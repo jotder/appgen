@@ -1,0 +1,33 @@
+<div class="page-editor-form" [formGroup]="pageForm">
+  <h3>{{ page.title }} ({{ page.id }}.json)</h3>
+  <div class="form-field">
+    <label for="title">Page Title:</label>
+    <input id="title" formControlName="title" />
+  </div>
+
+  <h4>Widgets</h4>
+  <div class="widget-list">
+    @for (widget of page.widgets; track widget.instanceId) {
+      <div class="widget-item">
+        <span>{{ widget.type }}</span>
+        <div class="widget-actions">
+          <button (click)="editWidget(widget)">Edit</button>
+          <button (click)="removeWidget(widget)">Remove</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="form-actions">
+    <button (click)="addWidget()">Add Widget</button>
+    <button (click)="save()">Save Page</button>
+  </div>
+</div>
+
+@if (showWidgetEditor()) {
+  <app-widget-editor
+    [widget]="editingWidget()"
+    (widgetSaved)="handleWidgetSaved($event)"
+    (cancelled)="handleWidgetEditorCancelled()"
+  ></app-widget-editor>
+}
