@@ -20,12 +20,30 @@
           "config": {
             "title": "User Signups Over Time",
             "data": [
-              { "date": "2023-01", "signups": 150 },
-              { "date": "2023-02", "signups": 200 },
-              { "date": "2023-03", "signups": 180 },
-              { "date": "2023-04", "signups": 220 },
-              { "date": "2023-05", "signups": 250 },
-              { "date": "2023-06", "signups": 300 }
+              {
+                "date": "2023-01",
+                "signups": 150
+              },
+              {
+                "date": "2023-02",
+                "signups": 200
+              },
+              {
+                "date": "2023-03",
+                "signups": 180
+              },
+              {
+                "date": "2023-04",
+                "signups": 220
+              },
+              {
+                "date": "2023-05",
+                "signups": 250
+              },
+              {
+                "date": "2023-06",
+                "signups": 300
+              }
             ]
           }
         },
@@ -34,12 +52,32 @@
           "type": "data-table",
           "config": {
             "title": "Latest User Actions",
-            "columns": ["user", "action", "timestamp"],
+            "columns": [
+              "user",
+              "action",
+              "timestamp"
+            ],
             "data": [
-              { "user": "user@example.com", "action": "Logged In", "timestamp": "2023-07-21T10:00:00Z" },
-              { "user": "test@example.com", "action": "Viewed Page: Dashboard", "timestamp": "2023-07-21T09:58:12Z" },
-              { "user": "demo@example.com", "action": "Updated Profile", "timestamp": "2023-07-21T09:55:45Z" },
-              { "user": "user@example.com", "action": "Created Widget", "timestamp": "2023-07-21T09:52:03Z" }
+              {
+                "user": "user@example.com",
+                "action": "Logged In",
+                "timestamp": "2023-07-21T10:00:00Z"
+              },
+              {
+                "user": "test@example.com",
+                "action": "Viewed Page: Dashboard",
+                "timestamp": "2023-07-21T09:58:12Z"
+              },
+              {
+                "user": "demo@example.com",
+                "action": "Updated Profile",
+                "timestamp": "2023-07-21T09:55:45Z"
+              },
+              {
+                "user": "user@example.com",
+                "action": "Created Widget",
+                "timestamp": "2023-07-21T09:52:03Z"
+              }
             ]
           }
         }

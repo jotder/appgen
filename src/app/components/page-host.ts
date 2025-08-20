@@ -1,7 +1,7 @@
 import {Component, inject, Injector, Input, OnChanges, SimpleChanges, ViewContainerRef,} from '@angular/core';
 import {PageRegistry} from '../core/services/page-registry';
 import {PAGE_CONFIG} from '../core/tokens';
-import { PageModel} from '../core/models/page.model';
+import {PageModel} from '../core/models/page.model';
 
 /**
  * Dynamically loads and renders a page component from the PageRegistry.

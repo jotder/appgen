@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import {InjectionToken} from '@angular/core';
 
 /**
  * Injection token that can be used to access the data of a page.

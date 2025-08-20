@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
-import { PageModel } from '../models/page.model';
-import { MenuItem } from '../models/menu.model';
+import {Injectable, signal} from '@angular/core';
+import {PageModel} from '../models/page.model';
+import {MenuItem} from '../models/menu.model';
 
 // In a real app, this data would come from an API.
 // For this project, we import the mock JSON data directly.
@@ -13,33 +13,33 @@ import * as userActivityData from '../../../assets/data/user-activity.json';
  * Loads and provides access to all application configuration data.
  */
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class Config {
-  /** A map of all available page configurations, keyed by page ID. */
-  private pages = new Map<string, PageModel>();
-  /** Signal for the main navigation menu items. */
-  menuItems = signal<MenuItem[]>([]);
+    /** Signal for the main navigation menu items. */
+    menuItems = signal<MenuItem[]>([]);
+    /** A map of all available page configurations, keyed by page ID. */
+    private pages = new Map<string, PageModel>();
 
-  constructor() {
-    this.loadData();
-  }
+    constructor() {
+        this.loadData();
+    }
 
-  /** Loads all JSON configuration data into memory. */
-  private loadData(): void {
-    this.menuItems.set((appData as any).menu);
+    /** Retrieves a page configuration by its ID. */
+    getPage(id: string): PageModel | undefined {
+        return this.pages.get(id);
+    }
 
-    const allPages: PageModel[] = [
-      ...(dashboardData as any).pages,
-      ...(salesReportData as any).pages,
-      ...(userActivityData as any).pages,
-    ];
+    /** Loads all JSON configuration data into memory. */
+    private loadData(): void {
+        this.menuItems.set((appData as any).menu);
 
-    allPages.forEach(page => this.pages.set(page.id, page));
-  }
+        const allPages: PageModel[] = [
+            ...(dashboardData as any).pages,
+            ...(salesReportData as any).pages,
+            ...(userActivityData as any).pages,
+        ];
 
-  /** Retrieves a page configuration by its ID. */
-  getPage(id: string): PageModel | undefined {
-    return this.pages.get(id);
-  }
+        allPages.forEach(page => this.pages.set(page.id, page));
+    }
 }

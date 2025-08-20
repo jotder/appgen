@@ -1,16 +1,22 @@
-import { Injectable, Type } from '@angular/core';
-import { SummaryCardsWidget } from '../../widgets/summary-cards/summary-cards.widget';
-import { WidgetModel } from '../models/widget.model';
+import {Injectable, Type} from '@angular/core';
+import {SummaryCardsWidget} from '../../widgets/summary-cards.widget';
+import {BarChartWidget} from '../../widgets/bar-chart.widget';
+import {DataTableWidget} from '../../widgets/data-table.widget';
+import {PieChartWidget} from '../../widgets/pie-chart.widget';
+import {StatCardWidget} from '../../widgets/stat-card.widget';
+import {WidgetModel} from "../models";
 
 /**
  * A base interface for all widget components to ensure type safety and a common API.
  */
-export interface IWidgetComponent {
-  /**
-   * The configuration object for the widget instance.
-   * This is provided via dependency injection using the WIDGET_CONFIG token.
-   */
-  config: WidgetModel;
+export interface IWidgetComponent<C = any, D = any> {
+    /**
+     * The configuration object for the widget instance.
+     * This is provided via dependency injection using the WIDGET_CONFIG token.
+     * The generic types C (config) and D (data) allow for strong typing
+     * within the specific widget component.
+     */
+    config: WidgetModel<C, D>;
 }
 
 /**
@@ -19,37 +25,41 @@ export interface IWidgetComponent {
  * to the actual Angular component class that should be rendered.
  */
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class WidgetRegistry {
-  private widgetMap = new Map<string, Type<IWidgetComponent>>();
+    private widgetMap = new Map<string, Type<IWidgetComponent>>();
 
-  constructor() {
-    this.registerAllWidgets();
-  }
-
-  /**
-   * Retrieves the component type for a given widget type string.
-   * @param type The type string of the widget (e.g., 'summary-cards').
-   * @returns The component's Type, or undefined if no component is registered for that type.
-   */
-  getWidget(type: string): Type<IWidgetComponent> | undefined {
-    return this.widgetMap.get(type);
-  }
-
-  /**
-   * Registers a single widget component.
-   * @param type The type string to associate with the component.
-   * @param component The component class (Type).
-   */
-  registerWidget(type: string, component: Type<IWidgetComponent>): void {
-    if (this.widgetMap.has(type)) {
-      console.warn(`[WidgetRegistry] Widget type "${type}" is already registered. Overwriting.`);
+    constructor() {
+        this.registerAllWidgets();
     }
-    this.widgetMap.set(type, component);
-  }
 
-  private registerAllWidgets(): void {
-    this.registerWidget('summary-cards', SummaryCardsWidget);
-  }
+    /**
+     * Retrieves the component type for a given widget type string.
+     * @param type The type string of the widget (e.g., 'summary-cards').
+     * @returns The component's Type, or undefined if no component is registered for that type.
+     */
+    getWidget(type: string): Type<IWidgetComponent> | undefined {
+        return this.widgetMap.get(type);
+    }
+
+    /**
+     * Registers a single widget component.
+     * @param type The type string to associate with the component.
+     * @param component The component class (Type).
+     */
+    registerWidget(type: string, component: Type<IWidgetComponent>): void {
+        if (this.widgetMap.has(type)) {
+            console.warn(`[WidgetRegistry] Widget type "${type}" is already registered. Overwriting.`);
+        }
+        this.widgetMap.set(type, component);
+    }
+
+    private registerAllWidgets(): void {
+        this.registerWidget('summary-cards', SummaryCardsWidget);
+        this.registerWidget('bar-chart', BarChartWidget);
+        this.registerWidget('data-table', DataTableWidget);
+        this.registerWidget('pie-chart', PieChartWidget);
+        this.registerWidget('stat-card', StatCardWidget);
+    }
 }

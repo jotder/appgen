@@ -8,9 +8,9 @@ import {
     MatCardSubtitle,
     MatCardTitle
 } from "@angular/material/card";
-import {WidgetRegistry} from "../../core/services/widget-registry";
-import {WIDGET_CONFIG} from "../../core/tokens";
-import {WidgetModel} from "../../core/models/widget.model";
+import {WidgetRegistry} from '../../core/services/widget-registry';
+import {WIDGET_CONFIG} from '../../core/tokens';
+import {WidgetModel} from '../../core/models';
 
 /**
  * A host component that dynamically loads and renders a widget component
@@ -23,7 +23,7 @@ import {WidgetModel} from "../../core/models/widget.model";
     template: `
         <mat-card class="widget-card">
             <mat-card-header>
-                <mat-card-title>{{ config()['config']?.title ?? 'Widget' }}</mat-card-title>
+                <mat-card-title>{{ config().config.title ?? 'Widget' }}</mat-card-title>
                 <mat-card-subtitle>Type: {{ config().type }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
@@ -50,12 +50,7 @@ export class WidgetHost {
 
     constructor() {
         effect(() => {
-            this.loadWidget();// ...
-            export class WidgetHost {
-                /** The configuration for the widget to be rendered. */
-                config = input.required<WidgetModel>(); // The input is named 'config'
-                // ...
-            }
+            this.loadWidget();
         });
     }
 
@@ -70,7 +65,7 @@ export class WidgetHost {
 
         // Prevent rendering if the widget's specific 'config' property is missing.
         // This makes the host resilient to malformed data from the JSON source.
-        if (!widgetData['config']) {
+        if (!widgetData.config) {
             console.warn(`[WidgetHost] Widget "${widgetData.type}" (instanceId: ${widgetData.instanceId}) is missing its 'config' object. It will not be rendered.`);
             return;
         }
