@@ -2,8 +2,8 @@ import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PAGE_CONFIG} from '../../core/tokens';
 import {IPage} from '../../core/services/page-registry';
-import {PageModel} from '../../core/models/page.model';
-import {WidgetHost} from "../../shared/components/widget-host";
+import {PageModel} from '../../core/models';
+import {WidgetHost} from "../../components/widget-host";
 
 @Component({
     selector: 'app-dashboard-page',

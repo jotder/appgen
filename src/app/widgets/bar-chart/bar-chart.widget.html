@@ -1,0 +1,13 @@
+<div class="widget-container bar-chart-widget">
+    <h3>{{ config.config.title }}</h3>
+    <div class="chart-content">
+        @for (item of config.data; track item.region) {
+            <div class="bar-item">
+                <span class="label">{{ item.region }}</span>
+                <div class="bar" [style.width.%]="(item.sales / 6000) * 100">
+                    <span class="value">{{ item.sales | number }}</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Config} from '../../core/services/config';
-import {WidgetHost} from "../../shared/components/widget-host";
-import {PageModel} from "../../core/models/page.model";
+import {WidgetHost} from '../../components/widget-host';
+import {PageModel} from '../../core/models';
 
 /** Renders a page and its widgets based on the route's ':id' parameter. */
 @Component({

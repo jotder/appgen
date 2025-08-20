@@ -5,7 +5,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 
 import {PageModel} from '../../core/models/page.model';
 import {Config} from '../../core/services/config';
-import {WidgetHost} from "../../shared/components/widget-host";
+import {WidgetHost} from "../../components/widget-host";
 
 
 /**

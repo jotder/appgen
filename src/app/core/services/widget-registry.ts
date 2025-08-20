@@ -1,10 +1,11 @@
 import {Injectable, Type} from '@angular/core';
-import {SummaryCardsWidget} from '../../widgets/summary-cards.widget';
-import {BarChartWidget} from '../../widgets/bar-chart.widget';
-import {DataTableWidget} from '../../widgets/data-table.widget';
-import {PieChartWidget} from '../../widgets/pie-chart.widget';
-import {StatCardWidget} from '../../widgets/stat-card.widget';
-import {WidgetModel} from "../models";
+import {SummaryCardsWidget} from '../../widgets/summary-cards/summary-cards.widget';
+import {StatCardWidget} from '../../widgets/stat-card/stat-card.widget';
+import {WidgetModel} from '../models';
+import {BarChartWidget} from '../../widgets/bar-chart/bar-chart.widget';
+import {DataTableWidget} from '../../widgets/data-table/data-table.widget';
+import {PieChartWidget} from '../../widgets/pie-chart/pie-chart.widget';
+import {LineChartWidget} from '../../widgets/line-chart/line-chart.widget';
 
 /**
  * A base interface for all widget components to ensure type safety and a common API.
@@ -61,5 +62,6 @@ export class WidgetRegistry {
         this.registerWidget('data-table', DataTableWidget);
         this.registerWidget('pie-chart', PieChartWidget);
         this.registerWidget('stat-card', StatCardWidget);
+        this.registerWidget('line-chart', LineChartWidget);
     }
 }

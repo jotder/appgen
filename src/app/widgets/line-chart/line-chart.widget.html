@@ -1,0 +1,11 @@
+<div class="widget-container line-chart-widget">
+    <h3>{{ config.config.title }}</h3>
+    <div class="chart-content">
+        <!-- A real line chart would use SVG or a library, this is a simple list representation -->
+        <ul>
+            @for (item of config.data; track item[config.config.categoryKey]) {
+                <li>{{ item[config.config.categoryKey] }}: {{ item[config.config.valueKey] | number }}</li>
+            }
+        </ul>
+    </div>
+</div>

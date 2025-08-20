@@ -1,22 +1,20 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
-import {WIDGET_CONFIG} from '../core/tokens';
-import {IWidgetComponent} from '../core/services/widget-registry';
-import {WidgetModel} from '../core/models/widget.model';
+import {WIDGET_CONFIG} from '../../core/tokens';
+import {IWidgetComponent} from '../../core/services/widget-registry';
+import {WidgetModel} from '../../core/models';
 
-export interface SummaryCard {
-    title: string;
+export interface SummaryCardData {
+    label: string;
     value: string;
-    icon: string;
+    icon?: string;
 }
 
 /**
  * Defines the specific `config` object structure for the SummaryCardsWidget.
  */
-interface SummaryCardsConfig {
-    cards: SummaryCard[];
-}
+interface SummaryCardsConfig {}
 
 @Component({
     selector: 'app-summary-cards-widget',
@@ -24,10 +22,10 @@ interface SummaryCardsConfig {
     imports: [CommonModule, MatCardModule],
     template: `
         <div class="summary-cards-container">
-            @for (card of config.config.cards; track card.title) {
+            @for (card of config.data; track card.label) {
                 <mat-card class="summary-card">
                     <mat-card-header>
-                        <mat-card-title>{{ card.title }}</mat-card-title>
+                        <mat-card-title>{{ card.label }}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <div class="value">{{ card.value }}</div>
@@ -57,6 +55,6 @@ interface SummaryCardsConfig {
       }
     `]
 })
-export class SummaryCardsWidget implements IWidgetComponent<SummaryCardsConfig> {
-    config = inject<WidgetModel<SummaryCardsConfig>>(WIDGET_CONFIG);
+export class SummaryCardsWidget implements IWidgetComponent<SummaryCardsConfig, SummaryCardData[]> {
+    config = inject<WidgetModel<SummaryCardsConfig, SummaryCardData[]>>(WIDGET_CONFIG);
 }

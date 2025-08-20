@@ -7,4 +7,3 @@ export interface PageModel {
     layout: 'grid'; // or other layouts
     widgets: WidgetModel[];
 }
-

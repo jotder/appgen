@@ -1,0 +1,11 @@
+<div class="widget-container pie-chart-widget">
+    <h3>{{ config.config.title }}</h3>
+    <div class="chart-content">
+        <!-- A real pie chart would use SVG or a library, this is a simple list representation -->
+        <ul>
+            @for (item of config.data; track item.category) {
+                <li>{{ item.category }}: {{ item.sales | number }}</li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,7 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Config} from './core/services/config';
+import {AuthService} from './core/services/auth.service';
+import {MenuItem} from './core/models';
 
 /** The root component of the application. */
 @Component({
@@ -13,7 +15,14 @@ import {Config} from './core/services/config';
 })
 export class AppComponent {
     private readonly config = inject(Config);
+    private readonly authService = inject(AuthService);
 
-    /** Signal for the main navigation menu items. */
-    readonly menuItems = this.config.menuItems;
+    /**
+     * A computed signal for the main navigation menu items.
+     * It derives the correct menu from the application configuration
+     * based on the current user's role from the AuthService.
+     */
+    readonly menuItems = computed<MenuItem[]>(() =>
+        this.config.getMenuForRole(this.authService.userRole()),
+    );
 }

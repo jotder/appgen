@@ -1,0 +1,35 @@
+.data-table-widget {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+  }
+
+  .filter-field {
+    width: 250px;
+    // Reduce default padding/margin for a more compact look
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+}
+
+.table-wrapper {
+  overflow: auto;
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+}

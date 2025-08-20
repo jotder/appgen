@@ -6,7 +6,7 @@
         <ul>
             @for (item of menuItems(); track item.id) {
                 <li>
-                    <a [routerLink]="item.route">{{ item.title }}</a>
+                    <a [routerLink]="['/pages', item.page]">{{ item.title }}</a>
                 </li>
             }
         </ul>

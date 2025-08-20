@@ -1,0 +1,29 @@
+.bar-chart-widget {
+    .bar-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .label {
+        width: 80px;
+        flex-shrink: 0;
+        font-size: 0.9em;
+    }
+
+    .bar {
+        height: 24px;
+        background-color: steelblue;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        border-radius: 2px;
+        min-width: 20px; // So the text is visible even for small values
+    }
+
+    .value {
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+}

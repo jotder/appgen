@@ -5,10 +5,28 @@
   "widgets": [
     {
       "instanceId": "ua1",
-      "type": "stat-card",
+      "type": "summary-cards",
       "config": {
-        "title": "Active Users (24h)",
-        "apiUrl": "/api/data/user-activity/active-users"
+        "title": "User Activity Highlights",
+        "apiUrl": "/api/data/user-activity/summary",
+        "data": [
+          {
+            "label": "Active Users (24h)",
+            "value": "1,432"
+          },
+          {
+            "label": "New Signups (7d)",
+            "value": "156"
+          },
+          {
+            "label": "Avg. Session Duration",
+            "value": "12m 34s"
+          },
+          {
+            "label": "Bounce Rate",
+            "value": "23.5%"
+          }
+        ]
       }
     },
     {
@@ -16,7 +34,39 @@
       "type": "line-chart",
       "config": {
         "title": "User Signups Over Time",
-        "apiUrl": "/api/data/user-activity/signups-over-time"
+        "apiUrl": "/api/data/user-activity/signups-over-time",
+        "categoryKey": "date",
+        "valueKey": "signups",
+        "data": [
+          {
+            "date": "2023-10-01",
+            "signups": 15
+          },
+          {
+            "date": "2023-10-02",
+            "signups": 22
+          },
+          {
+            "date": "2023-10-03",
+            "signups": 18
+          },
+          {
+            "date": "2023-10-04",
+            "signups": 25
+          },
+          {
+            "date": "2023-10-05",
+            "signups": 30
+          },
+          {
+            "date": "2023-10-06",
+            "signups": 28
+          },
+          {
+            "date": "2023-10-07",
+            "signups": 35
+          }
+        ]
       }
     },
     {
@@ -25,11 +75,72 @@
       "config": {
         "title": "Latest User Actions",
         "columns": [
-          "user",
-          "action",
-          "timestamp"
+          {
+            "key": "user",
+            "header": "User",
+            "sortable": true
+          },
+          {
+            "key": "action",
+            "header": "Action",
+            "sortable": true
+          },
+          {
+            "key": "timestamp",
+            "header": "Timestamp",
+            "sortable": true
+          }
         ],
-        "apiUrl": "/api/data/user-activity/latest-actions"
+        "apiUrl": "/api/data/user-activity/latest-actions",
+        "showSearch": true,
+        "showPaginator": true,
+        "data": [
+          {
+            "user": "alex.doe",
+            "action": "Logged In",
+            "timestamp": "2023-10-07T10:00:00Z"
+          },
+          {
+            "user": "jane.smith",
+            "action": "Updated Profile",
+            "timestamp": "2023-10-07T09:55:12Z"
+          },
+          {
+            "user": "sam.jones",
+            "action": "Posted a comment",
+            "timestamp": "2023-10-07T09:52:03Z"
+          },
+          {
+            "user": "alex.doe",
+            "action": "Viewed Dashboard",
+            "timestamp": "2023-10-07T09:45:45Z"
+          },
+          {
+            "user": "alex.doe",
+            "action": "Viewed Dashboard",
+            "timestamp": "2023-10-07T09:46:45Z"
+          },
+          {
+            "user": "alex.doe",
+            "action": "Viewed Dashboard",
+            "timestamp": "2023-10-07T09:47:45Z"
+          },
+          {
+            "user": "alex.doe",
+            "action": "Viewed Dashboard",
+            "timestamp": "2023-10-07T09:48:45Z"
+          },
+          {
+            "user": "alex.doe",
+            "action": "Viewed Dashboard",
+            "timestamp": "2023-10-07T09:49:45Z"
+          },
+          {
+            "user": "chris.green",
+            "action": "Logged In",
+            "timestamp": "2023-10-07T09:40:21Z"
+          }
+        ]
       }
     }
   ]
