@@ -1,0 +1,30 @@
+<div class="control-panel-container">
+  <h1>Control Panel</h1>
+  <p>Welcome, admin! This is the control panel.</p>
+
+  <button (click)="toggleWizard()">
+    {{ showWizard() ? 'Cancel' : 'Create New Page' }}
+  </button>
+
+  @if (showWizard()) {
+    <app-page-wizard
+      (pageCreated)="handlePageCreated($event)"
+      (cancelled)="toggleWizard()"
+    ></app-page-wizard>
+  } @else {
+    <div class="config-editor" [formGroup]="configForm">
+      <h2>Application Configuration (app.json)</h2>
+      <textarea formControlName="appConfig"></textarea>
+
+      <h2>Page Configurations</h2>
+      @for (page of pages(); track page.id) {
+        <div class="page-editor">
+          <h3>{{ page.title }} ({{ page.id }}.json)</h3>
+          <textarea [formControlName]="page.id"></textarea>
+        </div>
+      }
+
+      <button (click)="saveChanges()">Save All Changes</button>
+    </div>
+  }
+</div>

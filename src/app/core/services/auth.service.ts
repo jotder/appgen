@@ -1,17 +1,34 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
-/**
- * A placeholder service for managing user authentication state.
- * In a real application, this would interact with a backend to log in/out
- * and retrieve user information.
- */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  /**
-   * A signal representing the current user's role. Defaults to 'user'.
-   * In a real app, this would be set after a successful login.
-   */
-  readonly userRole = signal<'user' | 'admin'>('user');
+  private readonly _userRole = signal<'user' | 'admin' | null>(null);
+
+  constructor() {
+    if (typeof window !== 'undefined') {
+      const storedRole = sessionStorage.getItem('userRole');
+      if (storedRole === 'user' || storedRole === 'admin') {
+        this._userRole.set(storedRole);
+      }
+    }
+  }
+
+  readonly userRole = this._userRole.asReadonly();
+  readonly isAuthenticated = computed(() => this._userRole() !== null);
+
+  login(role: 'user' | 'admin'): void {
+    this._userRole.set(role);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('userRole', role);
+    }
+  }
+
+  logout(): void {
+    this._userRole.set(null);
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('userRole');
+    }
+  }
 }

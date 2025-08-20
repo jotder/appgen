@@ -1,18 +1,24 @@
 <div class="app-container">
+  @if (authService.isAuthenticated()) {
     <nav class="navigation-menu">
-        <div class="menu-header">
-            <h2>App Generator</h2>
-        </div>
-        <ul>
-            @for (item of menuItems(); track item.id) {
-                <li>
-                    <a [routerLink]="['/pages', item.page]">{{ item.title }}</a>
-                </li>
-            }
-        </ul>
+      <div class="menu-header">
+        <h2>App Generator</h2>
+      </div>
+      <ul>
+        @for (item of menuItems(); track item.id) {
+          <li>
+            <a [routerLink]="['/pages', item.page]">{{ item.title }}</a>
+          </li>
+        }
+      </ul>
+      <div class="user-info">
+        <span>Role: {{ authService.userRole() }}</span>
+        <button (click)="logout()">Logout</button>
+      </div>
     </nav>
+  }
 
-    <main class="content-area">
-        <router-outlet></router-outlet>
-    </main>
+  <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
 </div>

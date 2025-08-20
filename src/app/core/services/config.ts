@@ -30,6 +30,11 @@ export class Config {
         return this.pages.get(id);
     }
 
+    /** Retrieves all page configurations. */
+    getAllPages(): PageModel[] {
+        return Array.from(this.pages.values());
+    }
+
     /**
      * Retrieves the menu configuration for a specific user role.
      * This is a convenience method to extract role-specific data from the main config.
