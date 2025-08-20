@@ -1,0 +1,16 @@
+<div class="wizard-form">
+  <form [formGroup]="pageForm" (ngSubmit)="createPage()">
+    <div class="form-field">
+      <label for="id">Page ID:</label>
+      <input id="id" formControlName="id" />
+    </div>
+    <div class="form-field">
+      <label for="title">Page Title:</label>
+      <input id="title" formControlName="title" />
+    </div>
+    <div class="form-actions">
+      <button type="submit" [disabled]="pageForm.invalid">Create Page</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
