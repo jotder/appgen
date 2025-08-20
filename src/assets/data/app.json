@@ -1,19 +1,60 @@
 {
-  "menu": [
-    {
-      "id": "dashboard",
-      "title": "Dashboard",
-      "route": "/pages/dashboard"
+  "application": {
+    "layout": {
+      "menu": true,
+      "header": true,
+      "footer": false
     },
-    {
-      "id": "sales-report",
-      "title": "Sales Report",
-      "route": "/pages/sales-report"
-    },
-    {
-      "id": "user-activity",
-      "title": "User Activity",
-      "route": "/pages/user-activity"
+    "landingPage": "/pages/dashboard",
+    "auth": {
+      "user": {
+        "menu": [
+          {
+            "id": "dashboard",
+            "title": "Dashboard",
+            "page": "dashboard"
+          },
+          {
+            "id": "sales-report",
+            "title": "Sales Report",
+            "page": "sales-report"
+          },
+          {
+            "id": "user-activity",
+            "title": "User Activity",
+            "page": "user-activity"
+          }
+        ]
+      },
+      "admin": {
+        "menu": [
+          {
+            "id": "dashboard",
+            "title": "Dashboard",
+            "page": "dashboard"
+          },
+          {
+            "id": "sales-report",
+            "title": "Sales Report",
+            "page": "sales-report"
+          },
+          {
+            "id": "user-activity",
+            "title": "User Activity",
+            "page": "user-activity"
+          },
+          {
+            "id": "control-panel",
+            "title": "Control Panel",
+            "page": "control-panel"
+          },
+          {
+            "id": "settings",
+            "title": "Settings",
+            "page": "settings"
+          }
+        ]
+      }
     }
-  ]
+  }
 }
