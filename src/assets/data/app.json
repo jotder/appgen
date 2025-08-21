@@ -44,9 +44,29 @@
             "page": "user-activity"
           },
           {
-            "id": "control-panel",
+            "id": "control-panel-group",
             "title": "Control Panel",
-            "page": "control-panel"
+            "page": "control-panel",
+            "children": [
+              {
+                "id": "app-config",
+                "title": "Application Configuration",
+                "page": "control-panel",
+                "fragment": "appConfig"
+              },
+              {
+                "id": "page-mgmt",
+                "title": "Page Management",
+                "page": "control-panel",
+                "fragment": "pages"
+              },
+              {
+                "id": "menu-mgmt",
+                "title": "Menu Management",
+                "page": "control-panel",
+                "fragment": "menu"
+              }
+            ]
           },
           {
             "id": "settings",

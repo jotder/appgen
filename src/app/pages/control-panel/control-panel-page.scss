@@ -1,1 +1,61 @@
 /* Styles for the control panel page */
+
+// Shared styles for editor sections within the control panel
+.page-editors,
+.widget-editor {
+  .view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .form-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-sizing: border-box; /* To include padding in width */
+    }
+
+    textarea {
+      font-family: monospace;
+      min-height: 120px;
+    }
+  }
+
+  .placeholder-text {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ddd;
+    border-radius: 4px;
+    text-align: center;
+    color: #666;
+  }
+}
+
+// Specific styles if needed
+.widget-editor {
+  .widget-form-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+}

@@ -1,26 +1,32 @@
 <div class="page-editor-form" [formGroup]="pageForm">
   <h3>{{ page.title }} ({{ page.id }}.json)</h3>
   <div class="form-field">
-    <label for="title">Page Title:</label>
-    <input id="title" formControlName="title" />
+    <label for="title-{{page.id}}">Page Title:</label>
+    <input id="title-{{page.id}}" formControlName="title" />
   </div>
 
   <h4>Widgets</h4>
-  <div class="widget-list">
-    @for (widget of page.widgets; track widget.instanceId) {
-      <div class="widget-item">
-        <span>{{ widget.type }}</span>
-        <div class="widget-actions">
-          <button (click)="editWidget(widget)">Edit</button>
-          <button (click)="removeWidget(widget)">Remove</button>
-        </div>
-      </div>
-    }
+  <div class="widget-management">
+    <div class="form-field">
+      <label for="widget-selector-{{page.id}}">Select a widget to edit:</label>
+      <select id="widget-selector-{{page.id}}" [value]="selectedWidgetId()" (change)="onWidgetSelect($event)">
+        <option value="null">-- Select a Widget --</option>
+        @for (widget of page.widgets; track widget.instanceId) {
+          <option [value]="widget.instanceId">{{ widget.config.title || widget.type }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="widget-actions">
+      <button (click)="addWidget()">Add New Widget</button>
+      @if (editingWidget()) {
+        <button class="danger" (click)="removeSelectedWidget()">Remove Selected Widget</button>
+      }
+    </div>
   </div>
 
   <div class="form-actions">
-    <button (click)="addWidget()">Add Widget</button>
-    <button (click)="save()">Save Page</button>
+    <button (click)="save()">Save Page Changes</button>
   </div>
 </div>
 

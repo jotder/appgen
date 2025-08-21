@@ -22,19 +22,33 @@
       }
     },
     {
+      "instanceId": "w5",
+      "type": "bar-chart",
+      "config": {
+        "title": "Sales by Region",
+        "apiUrl": "/api/data/dashboard/sales-by-region",
+        "data": [
+          { "region": "North", "sales": 10000 },
+          { "region": "international", "sales": 20000 }
+        ]
+      }
+    },
+    {
       "instanceId": "w2",
       "type": "bar-chart",
       "config": {
         "title": "Sales by Region",
         "apiUrl": "/api/data/dashboard/sales-by-region",
         "data": [
-          { "region": "North", "sales": 5400 },
+          { "region": "North", "sales": 6700 },
+          { "region": "international", "sales": 11700 },
           { "region": "South", "sales": 3200 },
           { "region": "East", "sales": 4100 },
           { "region": "West", "sales": 2800 }
         ]
       }
     },
+
     {
       "instanceId": "w3",
       "type": "data-table",

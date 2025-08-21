@@ -1,71 +1,138 @@
 <div class="control-panel-container">
-  <h1>Control Panel</h1>
-  <p>Welcome, admin! This is the control panel.</p>
-
-  <button (click)="toggleWizard()">
-    {{ showWizard() ? 'Cancel' : 'Create New Page' }}
-  </button>
-
-  @if (showWizard()) {
-    <app-page-wizard
-      (pageCreated)="handlePageCreated($event)"
-      (cancelled)="toggleWizard()"
-    ></app-page-wizard>
-  } @else {
-    <div class="config-editor" [formGroup]="appConfigForm">
-      <h2>Application Configuration</h2>
-      <div class="form-field">
-        <label for="landingPage">Landing Page:</label>
-        <input id="landingPage" formControlName="landingPage" />
-      </div>
-      <div formGroupName="layout">
-        <h3>Layout</h3>
-        <div class="form-field">
-          <label for="menu">Show Menu:</label>
-          <input id="menu" type="checkbox" formControlName="menu" />
+  <!-- Main Content Area -->
+  <div class="control-panel-content">
+    @switch (selectedSection()) {
+      @case ('appConfig') {
+        <div class="content-view">
+          <div class="config-editor" [formGroup]="appConfigForm">
+            <h2>Application Configuration</h2>
+            <div class="form-field">
+              <label for="landingPage">Landing Page:</label>
+              <input id="landingPage" formControlName="landingPage"/>
+            </div>
+            <div formGroupName="layout">
+              <h3>Layout</h3>
+              <div class="form-field">
+                <label for="menu">Show Menu:</label>
+                <input id="menu" type="checkbox" formControlName="menu"/>
+              </div>
+              <div class="form-field">
+                <label for="header">Show Header:</label>
+                <input id="header" type="checkbox" formControlName="header"/>
+              </div>
+              <div class="form-field">
+                <label for="footer">Show Footer:</label>
+                <input id="footer" type="checkbox" formControlName="footer"/>
+              </div>
+            </div>
+            <button (click)="saveChanges()">Save App Config</button>
+          </div>
         </div>
-        <div class="form-field">
-          <label for="header">Show Header:</label>
-          <input id="header" type="checkbox" formControlName="header" />
-        </div>
-        <div class="form-field">
-          <label for="footer">Show Footer:</label>
-          <input id="footer" type="checkbox" formControlName="footer" />
-        </div>
-      </div>
-      <button (click)="saveChanges()">Save App Config</button>
-    </div>
-
-    <div class="page-editors">
-      <h2>Page Configurations</h2>
-      @for (page of pages(); track page.id) {
-        <app-page-editor
-          [page]="page"
-          (pageUpdated)="handlePageUpdated($event)"
-        ></app-page-editor>
       }
-    </div>
+      @case ('pages') {
+        <div class="content-view">
+          <div class="page-editors">
+            <div class="view-header">
+              <h2>Page Configurations</h2>
+              <button (click)="selectedSection.set('wizard')">Create New Page</button>
+            </div>
+            <div class="form-field">
+              <label for="page-selector">Select a page to edit:</label>
+              <select id="page-selector" [value]="selectedPageId()" (change)="onPageSelect($event)">
+                <option [value]="null">-- Select a Page --</option>
+                @for (page of pages(); track page.id) {
+                  <option [value]="page.id">{{ page.title }}</option>
+                }
+              </select>
+            </div>
 
-    <div class="menu-editor">
-      <h2>Menu Management</h2>
-      <div class="menu-list-container">
-        <div class="menu-list">
-          <h3>Admin Menu</h3>
-          <div cdkDropList [cdkDropListData]="adminMenu()" (cdkDropListDropped)="drop($event, 'admin')">
-            @for (item of adminMenu(); track item.id) {
-              <div class="menu-item" cdkDrag>{{ item.title }}</div>
+            @if (selectedPage(); as page) {
+              <app-page-editor
+                [page]="page"
+                (pageUpdated)="handlePageUpdated($event)"
+              ></app-page-editor>
+            } @else {
+              <p class="placeholder-text">Please select a page from the dropdown to see its configuration.</p>
             }
           </div>
         </div>
-        <div class="menu-list">
-          <h3>User Menu</h3>
-          <div cdkDropList [cdkDropListData]="userMenu()" (cdkDropListDropped)="drop($event, 'user')">
-            @for (item of userMenu(); track item.id) {
-              <div class="menu-item" cdkDrag>{{ item.title }}</div>
+      }
+      @case ('widgets') {
+        <div class="content-view">
+          <div class="widget-editor">
+            <div class="view-header">
+              <h2>Widget Configurations</h2>
+            </div>
+            <div class="form-field">
+              <label for="widget-selector">Select a widget to edit:</label>
+              <select id="widget-selector" [value]="selectedWidgetId()" (change)="onWidgetSelect($event)">
+                <option [value]="null">-- Select a Widget --</option>
+                @for (widget of allWidgets(); track widget.instanceId) {
+                <option [value]="widget.instanceId">{{ widget.displayTitle }} (type: {{widget.type}}, on page: {{widget.pageTitle}})</option>
+                }
+              </select>
+            </div>
+
+            @if (selectedWidget(); as widget) {
+            <div class="widget-form-container" [formGroup]="widgetConfigForm">
+              <div class="form-field">
+                <label for="widget-title">Widget Title:</label>
+                <input id="widget-title" formControlName="title"/>
+              </div>
+              <div class="form-field">
+                <label for="widget-type">Widget Type:</label>
+                <input id="widget-type" formControlName="type"/>
+              </div>
+              <div class="form-field">
+                <label for="widget-config">Widget Config (JSON):</label>
+                <textarea id="widget-config" formControlName="config" rows="10"></textarea>
+              </div>
+              <button (click)="saveWidgetChanges()">Update Widget</button>
+            </div>
+            } @else {
+            <p class="placeholder-text">Please select a widget from the dropdown to see its configuration.</p>
             }
           </div>
         </div>
-      </div>
-    </div>
-  }
+      }
+      @case ('menu') {
+        <div class="content-view">
+          <div class="menu-editor">
+            <h2>Menu Management</h2>
+            <div class="menu-list-container">
+              <div class="menu-list">
+                <h3>Admin Menu</h3>
+                <div cdkDropList [cdkDropListData]="adminMenu()" (cdkDropListDropped)="drop($event, 'admin')">
+                  @for (item of adminMenu(); track item.id) {
+                    <div class="menu-item" cdkDrag>{{ item.title }}</div>
+                  }
+                </div>
+              </div>
+              <div class="menu-list">
+                <h3>User Menu</h3>
+                <div cdkDropList [cdkDropListData]="userMenu()" (cdkDropListDropped)="drop($event, 'user')">
+                  @for (item of userMenu(); track item.id) {
+                    <div class="menu-item" cdkDrag>{{ item.title }}</div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      @case ('wizard') {
+        <div class="content-view">
+          <app-page-wizard (pageCreated)="handlePageCreated($event)" (cancelled)="selectedSection.set('pages')">
+          </app-page-wizard>
+        </div>
+      }
+      @default {
+        <div class="content-view welcome-view">
+          <h1>Control Panel</h1>
+          <h2>Welcome, Admin!</h2>
+          <p>Select an item from the main navigation menu to manage your application.</p>
+        </div>
+      }
+    }
+  </div>
 </div>

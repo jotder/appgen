@@ -1,9 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { Config } from './core/services/config';
-import { AuthService } from './core/services/auth.service';
-import { MenuItem } from './core/models';
+import {Component, computed, inject} from '@angular/core';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Config} from './core/services/config';
+import {AuthService} from './core/services/auth.service';
+import {MenuItem} from './core/models';
 
 /** The root component of the application. */
 @Component({

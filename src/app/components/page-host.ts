@@ -9,7 +9,8 @@ import {PageModel} from '../core/models';
 @Component({
   selector: 'app-page-host',
   standalone: true,
-  template: '', // The view is dynamically created
+  template: `
+  `, // The view is dynamically created
 })
 
 export class PageHost implements OnChanges {

@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 
-import {PageModel} from '../../core/models/page.model';
+import {PageModel} from '../../core/models';
 import {Config} from '../../core/services/config';
 import {WidgetHost} from "../../components/widget-host";
 
